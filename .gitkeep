@@ -1,0 +1,7 @@
+data/raw/
+data/processed/
+data/features/
+artifacts/model/
+artifacts/preprocessing/
+logs/
+notebooks/

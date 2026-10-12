@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/iot_ids/__init__.py
+src/iot_ids/__main__.py
+src/iot_ids/config.py
+src/iot_ids.egg-info/PKG-INFO
+src/iot_ids.egg-info/SOURCES.txt
+src/iot_ids.egg-info/dependency_links.txt
+src/iot_ids.egg-info/requires.txt
+src/iot_ids.egg-info/top_level.txt
+tests/test_smoke.py

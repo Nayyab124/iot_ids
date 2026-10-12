@@ -1,0 +1,18 @@
+Dataset: CICIoT2023 selected CSV files
+Rows: 34486
+Features: 39
+Accuracy: 0.9106
+
+              precision    recall  f1-score   support
+
+      Benign       0.81      0.91      0.85      2000
+      Attack       0.96      0.91      0.94      4898
+
+    accuracy                           0.91      6898
+   macro avg       0.88      0.91      0.90      6898
+weighted avg       0.92      0.91      0.91      6898
+
+
+Confusion matrix:
+[[1814  186]
+ [ 431 4467]]

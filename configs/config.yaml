@@ -1,0 +1,24 @@
+project:
+  name: "IoT IDS/IPS"
+  stage: "phase-1"
+
+paths:
+  raw_data: "data/raw"
+  processed_data: "data/processed"
+  features: "data/features"
+  model_artifacts: "artifacts/model"
+  preprocessing_artifacts: "artifacts/preprocessing"
+  logs: "logs"
+
+dataset:
+  target_column: "Label"
+  test_size: 0.20
+  random_state: 42
+
+detection:
+  confidence_threshold: 0.80
+  voting_window_size: 10
+
+ips:
+  enabled: false
+  mode: "alert_only"

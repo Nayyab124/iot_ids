@@ -1,0 +1,29 @@
+
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Raw datasets
+data/raw/
+
+# Generated logs
+logs/*.csv
+logs/*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Large trained model (kept locally)
+models/iot_ids_multiclass.joblib
+
+# Large trained model (kept locally)
+models/iot_ids_multiclass.joblib

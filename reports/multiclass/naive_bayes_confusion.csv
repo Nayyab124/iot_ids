@@ -1,0 +1,6 @@
+,Benign,Brute Force,DDoS,IoT Malware,Network attacks
+Benign,874,144,0,175,7
+Brute Force,125,130,0,41,4
+DDoS,0,0,2375,1183,42
+IoT Malware,135,61,6,987,11
+Network attacks,1523,633,580,1014,250

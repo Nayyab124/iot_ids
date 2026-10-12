@@ -1,0 +1,35 @@
+TRAINING / EVALUATION CAPTURE AUDIT
+Training row cap per category: 10000
+Selection below follows sorted CSV order and the per-category cap.
+A file is marked as a likely training source if the cap can be filled from it.
+
+[Benign_Final]
+  CANDIDATE: BenignTraffic.pcap.csv | contributes up to 10000 rows | SHA256=f0ee40b64ac395ecf3ce7cff7580343718554985a68ec6f07d7276d8f31b9ee6
+
+[Backdoor_Malware]
+  CANDIDATE: Backdoor_Malware.pcap.csv | contributes up to 3218 rows | SHA256=b076424c816ecf99f40d466f95a8ea4336c5077d4afdc05220fa26d528f4a06f
+  WARNING: category may have fewer than 10000 usable rows.
+
+[BrowserHijacking]
+  CANDIDATE: BrowserHijacking.pcap.csv | contributes up to 5859 rows | SHA256=cb8ae8b62bfbb9594ca54a042d80ebfa194526279c1e7c60b3fc9d587264e40b
+  WARNING: category may have fewer than 10000 usable rows.
+
+[CommandInjection]
+  CANDIDATE: CommandInjection.pcap.csv | contributes up to 5409 rows | SHA256=8d2cacd92968707719bdc67fea854558e45f083fb315df6c52b637db18fd4aeb
+  WARNING: category may have fewer than 10000 usable rows.
+
+[DDoS-ACK_Fragmentation]
+  CANDIDATE: DDoS-ACK_Fragmentation.pcap.csv | contributes up to 10000 rows | SHA256=60ade5c90233e02d09012cef3a84a8da69d9e8d5cf4f544e4a09c8ba0647cecc
+
+[Evaluation capture comparison]
+  No exact-file hash match: BenignTraffic1.pcap.csv | SHA256=d185c67268fdde5d091c07361001926bdac49e5774824fd5920663721814070e
+  No exact-file hash match: BenignTraffic2.pcap.csv | SHA256=71540cd0e9c65d78560003641a00438f9216693af0b7e6cf2b2e44b7234db6ac
+  No exact-file hash match: BenignTraffic3.pcap.csv | SHA256=861063adfc622eed3e3d84b17a2a9e19f89800a56ef575dc26fc0bd7e05a5d8e
+  No exact-file hash match: DDoS-HTTP_Flood-.pcap.csv | SHA256=124ac9cae65694761d755e9709d87f7375d8b85b8ee073860f050eebdab515ee
+
+IMPORTANT LIMITATIONS:
+- Different hashes do not prove the traffic is independent; duplicate or related
+  captures may have different filenames or CSV formatting.
+- This audit estimates source files from the known sampling logic; it does not
+  prove which rows were used unless the training run logged that information.
+- Do not describe a row-random split as independent capture-level validation.

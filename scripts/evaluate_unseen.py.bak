@@ -1,0 +1,68 @@
+
+from pathlib import Path
+
+import joblib
+import numpy as np
+import pandas as pd
+import xgboost as xgb
+from sklearn.metrics import classification_report, confusion_matrix
+
+ROOT = Path(r"E:\FYP\iot-ids")
+DATA = ROOT / "data" / "raw" / "CSV"
+MODEL = ROOT / "models" / "ciciot_xgboost_binary.json"
+PREP = ROOT / "models" / "ciciot_preprocessing.joblib"
+
+model = xgb.XGBClassifier()
+model.load_model(str(MODEL))
+
+prep = joblib.load(PREP)
+columns = prep["feature_columns"]
+medians = pd.Series(prep["medians"])
+
+# These are candidate evaluation files from attack categories.
+# They are only genuinely unseen if their capture files were not
+# included in training. Verify that before interpreting the scores.
+candidates = [
+    ("BrowserHijacking", "BrowserHijacking.pcap.csv", 1),
+    ("CommandInjection", "CommandInjection.pcap.csv", 1),
+    ("Backdoor_Malware", "Backdoor_Malware.pcap.csv", 1),
+]
+
+ys, preds = [], []
+
+for folder, filename, label in candidates:
+    path = DATA / folder / filename
+
+    if not path.exists():
+        print("Missing:", path)
+        continue
+
+    # Limit evaluation to a manageable number of rows.
+    df = pd.read_csv(path, nrows=5000, low_memory=False)
+
+    X = df.reindex(columns=columns)
+    X = X.apply(pd.to_numeric, errors="coerce")
+    X = X.replace([np.inf, -np.inf], np.nan)
+    X = X.fillna(medians).fillna(0)
+
+    pred = model.predict(X).astype(int)
+
+    ys.extend([label] * len(X))
+    preds.extend(pred.tolist())
+
+    print(f"\n{filename}: {len(X)} rows")
+    print("Predicted as attack:", int((pred == 1).sum()))
+    print("Predicted as benign:", int((pred == 0).sum()))
+
+if ys:
+    print("\nCombined evaluation:")
+    print(classification_report(
+        ys, preds,
+        labels=[0, 1],
+        target_names=["Benign", "Attack"],
+        zero_division=0,
+    ))
+    print("Confusion matrix:")
+    print(confusion_matrix(ys, preds, labels=[0, 1]))
+else:
+    print("No evaluation files were loaded.")

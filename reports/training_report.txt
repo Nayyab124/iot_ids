@@ -1,0 +1,86 @@
+IoT IDS TRAINING REPORT
+Dataset: CICIoT2023 CSV category folders
+Validation: stratified row-level random split; not independent-capture validation
+Random seed: 42
+Sampled rows: 111000
+Features: 39
+Training rows: 88800
+Testing rows: 22200
+
+CATEGORY SAMPLE COUNTS:
+Backdoor_Malware: rows=500, class=Attack, csv_files=1
+Benign_Final: rows=12000, class=Benign, csv_files=4
+BrowserHijacking: rows=500, class=Attack, csv_files=1
+CommandInjection: rows=500, class=Attack, csv_files=1
+DDoS-ACK_Fragmentation: rows=5000, class=Attack, csv_files=13
+DDoS-HTTP_Flood: rows=500, class=Attack, csv_files=1
+DDoS-ICMP_Flood: rows=5000, class=Attack, csv_files=27
+DDoS-ICMP_Fragmentation: rows=5000, class=Attack, csv_files=20
+DDoS-PSHACK_FLOOD: rows=5000, class=Attack, csv_files=16
+DDoS-RSTFINFLOOD: rows=5000, class=Attack, csv_files=16
+DDoS-SlowLoris: rows=500, class=Attack, csv_files=1
+DDoS-SYN_Flood: rows=5000, class=Attack, csv_files=16
+DDoS-SynonymousIP_Flood: rows=5000, class=Attack, csv_files=14
+DDoS-TCP_Flood: rows=5000, class=Attack, csv_files=18
+DDoS-UDP_Flood: rows=5000, class=Attack, csv_files=21
+DDoS-UDP_Fragmentation: rows=5000, class=Attack, csv_files=13
+DictionaryBruteForce: rows=500, class=Attack, csv_files=1
+DNS_Spoofing: rows=2000, class=Attack, csv_files=1
+DoS-HTTP_Flood: rows=1000, class=Attack, csv_files=2
+DoS-SYN_Flood: rows=5000, class=Attack, csv_files=8
+DoS-TCP_Flood: rows=5000, class=Attack, csv_files=11
+DoS-UDP_Flood: rows=5000, class=Attack, csv_files=17
+Mirai-greeth_flood: rows=5000, class=Attack, csv_files=29
+Mirai-greip_flood: rows=5000, class=Attack, csv_files=22
+Mirai-udpplain: rows=5000, class=Attack, csv_files=25
+MITM-ArpSpoofing: rows=3500, class=Attack, csv_files=2
+Recon-HostDiscovery: rows=1500, class=Attack, csv_files=1
+Recon-OSScan: rows=1000, class=Attack, csv_files=1
+Recon-PingSweep: rows=500, class=Attack, csv_files=1
+Recon-PortScan: rows=1000, class=Attack, csv_files=1
+SqlInjection: rows=500, class=Attack, csv_files=1
+Uploading_Attack: rows=500, class=Attack, csv_files=1
+VulnerabilityScan: rows=4000, class=Attack, csv_files=1
+XSS: rows=500, class=Attack, csv_files=1
+
+========== THRESHOLD 0.50 ==========
+Accuracy: 0.9334
+Attack precision: 0.9956
+Attack recall: 0.9294
+Attack F1: 0.9614
+Classification report:
+              precision    recall  f1-score   support
+
+      Benign       0.62      0.97      0.76      2400
+      Attack       1.00      0.93      0.96     19800
+
+    accuracy                           0.93     22200
+   macro avg       0.81      0.95      0.86     22200
+weighted avg       0.96      0.93      0.94     22200
+
+Confusion matrix (rows=true [Benign, Attack], columns=predicted):
+[[ 2319    81]
+ [ 1397 18403]]
+Benign false positives: 81
+Missed attacks: 1397
+
+========== THRESHOLD 0.80 ==========
+Accuracy: 0.9088
+Attack precision: 0.9988
+Attack recall: 0.8988
+Attack F1: 0.9462
+Classification report:
+              precision    recall  f1-score   support
+
+      Benign       0.54      0.99      0.70      2400
+      Attack       1.00      0.90      0.95     19800
+
+    accuracy                           0.91     22200
+   macro avg       0.77      0.95      0.82     22200
+weighted avg       0.95      0.91      0.92     22200
+
+Confusion matrix (rows=true [Benign, Attack], columns=predicted):
+[[ 2379    21]
+ [ 2004 17796]]
+Benign false positives: 21
+Missed attacks: 2004

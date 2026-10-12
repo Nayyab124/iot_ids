@@ -1,0 +1,48 @@
+IDS THRESHOLD ANALYSIS
+Candidate capture-level evaluation; capture independence still requires verification.
+Total rows: 80,000
+Benign rows: 60,000
+Attack rows: 20,000
+
+OVERALL RESULTS (rates shown as percentages)
+Threshold=0.30 | Accuracy=85.22% | Attack precision=62.85% | Attack recall=100.00% | F1=77.19% | FPR=19.70% | TN=48178 FP=11822 FN=0 TP=20000
+Threshold=0.40 | Accuracy=89.13% | Attack precision=69.70% | Attack recall=100.00% | F1=82.15% | FPR=14.49% | TN=51307 FP=8693 FN=0 TP=20000
+Threshold=0.50 | Accuracy=92.24% | Attack precision=76.31% | Attack recall=100.00% | F1=86.56% | FPR=10.35% | TN=53791 FP=6209 FN=0 TP=20000
+Threshold=0.60 | Accuracy=94.77% | Attack precision=82.72% | Attack recall=100.00% | F1=90.54% | FPR=6.97% | TN=55821 FP=4179 FN=1 TP=19999
+Threshold=0.70 | Accuracy=96.72% | Attack precision=88.41% | Attack recall=100.00% | F1=93.85% | FPR=4.37% | TN=57379 FP=2621 FN=1 TP=19999
+Threshold=0.80 | Accuracy=98.26% | Attack precision=93.51% | Attack recall=100.00% | F1=96.64% | FPR=2.31% | TN=58611 FP=1389 FN=1 TP=19999
+Threshold=0.90 | Accuracy=99.25% | Attack precision=97.09% | Attack recall=100.00% | F1=98.52% | FPR=1.00% | TN=59400 FP=600 FN=1 TP=19999
+
+PER-CAPTURE PREDICTED ATTACK RATE
+BenignTraffic1 (actual Benign, 20000 rows)
+  threshold 0.30: predicted attack 19.52%
+  threshold 0.40: predicted attack 14.32%
+  threshold 0.50: predicted attack 10.05%
+  threshold 0.60: predicted attack 6.59%
+  threshold 0.70: predicted attack 3.77%
+  threshold 0.80: predicted attack 1.64%
+  threshold 0.90: predicted attack 0.61%
+BenignTraffic2 (actual Benign, 20000 rows)
+  threshold 0.30: predicted attack 18.74%
+  threshold 0.40: predicted attack 13.58%
+  threshold 0.50: predicted attack 9.59%
+  threshold 0.60: predicted attack 6.38%
+  threshold 0.70: predicted attack 3.96%
+  threshold 0.80: predicted attack 2.11%
+  threshold 0.90: predicted attack 0.69%
+BenignTraffic3 (actual Benign, 20000 rows)
+  threshold 0.30: predicted attack 20.86%
+  threshold 0.40: predicted attack 15.57%
+  threshold 0.50: predicted attack 11.39%
+  threshold 0.60: predicted attack 7.94%
+  threshold 0.70: predicted attack 5.38%
+  threshold 0.80: predicted attack 3.19%
+  threshold 0.90: predicted attack 1.70%
+DDoS_HTTP_Flood (actual Attack, 20000 rows)
+  threshold 0.30: predicted attack 100.00%
+  threshold 0.40: predicted attack 100.00%
+  threshold 0.50: predicted attack 100.00%
+  threshold 0.60: predicted attack 100.00%
+  threshold 0.70: predicted attack 100.00%
+  threshold 0.80: predicted attack 100.00%
+  threshold 0.90: predicted attack 100.00%

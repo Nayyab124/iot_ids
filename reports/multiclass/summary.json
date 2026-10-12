@@ -1,0 +1,15 @@
+{
+  "rows_used": 51500,
+  "features": 39,
+  "classes": [
+    "Benign",
+    "Brute Force",
+    "DDoS",
+    "IoT Malware",
+    "Network attacks"
+  ],
+  "best_model": "Random Forest",
+  "smote_training_only": true,
+  "split": "stratified 80/20 row-level split",
+  "warning": "Validate on separate captures before claiming real-world performance."
+}

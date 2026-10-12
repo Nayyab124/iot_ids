@@ -1,0 +1,69 @@
+﻿from pathlib import Path
+
+import joblib
+import numpy as np
+import pandas as pd
+import xgboost as xgb
+from sklearn.metrics import classification_report, confusion_matrix
+
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data" / "raw" / "CSV"
+MODEL = ROOT / "models" / "ciciot_xgboost_binary.json"
+PREP = ROOT / "models" / "ciciot_preprocessing.joblib"
+CONFIG_PATH = ROOT / "configs" / "config.yaml"
+import yaml
+with CONFIG_PATH.open("r", encoding="utf-8") as f:
+    config = yaml.safe_load(f) or {}
+THRESHOLD = float(config.get("detection", {}).get("confidence_threshold", 0.80))
+
+# A category not included in the current training script.
+ATTACK_FILE = DATA / "DDoS-HTTP_Flood" / "DDoS-HTTP_Flood-.pcap.csv"
+
+# Benign capture files; use a different file from the one sampled
+# by the training script.
+BENIGN_FILE = DATA / "Benign_Final" / "BenignTraffic1.pcap.csv"
+
+for path in (MODEL, PREP, ATTACK_FILE, BENIGN_FILE):
+    if not path.is_file():
+        raise FileNotFoundError(f"Required file not found: {path}")
+
+model = xgb.XGBClassifier()
+model.load_model(str(MODEL))
+
+prep = joblib.load(PREP)
+columns = prep["feature_columns"]
+medians = pd.Series(prep["medians"])
+
+def load_features(path, limit=5000):
+    df = pd.read_csv(path, nrows=limit, low_memory=False)
+    X = df.reindex(columns=columns)
+    X = X.apply(pd.to_numeric, errors="coerce")
+    X = X.replace([np.inf, -np.inf], np.nan)
+    return X.fillna(medians).fillna(0)
+
+print(f"Decision threshold: {THRESHOLD:.2f}")
+print("Loading held-out candidate files...")
+X_benign = load_features(BENIGN_FILE)
+X_attack = load_features(ATTACK_FILE)
+
+X = pd.concat([X_benign, X_attack], ignore_index=True)
+y_true = np.concatenate([
+    np.zeros(len(X_benign), dtype=int),
+    np.ones(len(X_attack), dtype=int),
+])
+
+probabilities = model.predict_proba(X)[:, 1]
+pred = (probabilities >= THRESHOLD).astype(int)
+
+print(f"\nBenign rows: {len(X_benign)}")
+print(f"Attack rows: {len(X_attack)}")
+print("\nClassification report:")
+print(classification_report(
+    y_true,
+    pred,
+    labels=[0, 1],
+    target_names=["Benign", "Attack"],
+    zero_division=0,
+))
+print("Confusion matrix (rows=true, columns=predicted):")
+print(confusion_matrix(y_true, pred, labels=[0, 1]))

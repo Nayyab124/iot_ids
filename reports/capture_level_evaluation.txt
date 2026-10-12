@@ -1,0 +1,25 @@
+CAPTURE-LEVEL EVALUATION (candidate independent captures)
+Rows evaluated per capture: up to 20000
+Decision threshold: 0.80
+Note: verify capture provenance and duplicate traffic before claiming independence.
+
+BenignTraffic1.pcap.csv: rows=20000, actual=Benign, predicted_attack=327, predicted_benign=19673, attack_detection_rate=N/A, benign_false_positive_rate=0.01635
+BenignTraffic2.pcap.csv: rows=20000, actual=Benign, predicted_attack=423, predicted_benign=19577, attack_detection_rate=N/A, benign_false_positive_rate=0.02115
+BenignTraffic3.pcap.csv: rows=20000, actual=Benign, predicted_attack=639, predicted_benign=19361, attack_detection_rate=N/A, benign_false_positive_rate=0.03195
+DDoS-HTTP_Flood-.pcap.csv: rows=20000, actual=Attack, predicted_attack=19999, predicted_benign=1, attack_detection_rate=0.99995, benign_false_positive_rate=N/A
+
+Accuracy: 0.9826
+
+Classification report:
+              precision    recall  f1-score   support
+
+      Benign       1.00      0.98      0.99     60000
+      Attack       0.94      1.00      0.97     20000
+
+    accuracy                           0.98     80000
+   macro avg       0.97      0.99      0.98     80000
+weighted avg       0.98      0.98      0.98     80000
+
+Confusion matrix (rows=true, columns=predicted):
+[[58611  1389]
+ [    1 19999]]
